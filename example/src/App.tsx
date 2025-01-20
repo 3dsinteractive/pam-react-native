@@ -1,12 +1,18 @@
 import { Text, View, StyleSheet } from 'react-native';
-import { multiply } from 'pam-react-native';
+import { Pam } from 'pam-react-native';
 
-const result = multiply(3, 7);
+Pam.initialize({
+  baseApi: '',
+  trackingConsentMessageId: '',
+  publicDBAlias: '',
+  loginDBAlias: '',
+  loginKey: 'customer',
+});
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Text>Result:</Text>
     </View>
   );
 }
