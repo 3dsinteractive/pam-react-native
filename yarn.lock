@@ -2488,6 +2488,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-async-storage/async-storage@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@react-native-async-storage/async-storage@npm:2.1.0"
+  dependencies:
+    merge-options: ^3.0.4
+  peerDependencies:
+    react-native: ^0.0.0-0 || >=0.65 <1.0
+  checksum: bc6cdf3554fdd09f3e7916b105d966e56dbaca48475f33da378dd40c3823f7a6978057ca8207bc161c8e0b8c2b08161797dab48955bce1f3e3e457aeaa4ffaf9
+  languageName: node
+  linkType: hard
+
 "@react-native-community/cli-clean@npm:15.0.1":
   version: 15.0.1
   resolution: "@react-native-community/cli-clean@npm:15.0.1"
@@ -7387,6 +7398,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"is-plain-obj@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "is-plain-obj@npm:2.1.0"
+  checksum: cec9100678b0a9fe0248a81743041ed990c2d4c99f893d935545cfbc42876cbe86d207f3b895700c690ad2fa520e568c44afc1605044b535a7820c1d40e38daa
+  languageName: node
+  linkType: hard
+
 "is-plain-object@npm:^2.0.4":
   version: 2.0.4
   resolution: "is-plain-object@npm:2.0.4"
@@ -8815,6 +8833,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"merge-options@npm:^3.0.4":
+  version: 3.0.4
+  resolution: "merge-options@npm:3.0.4"
+  dependencies:
+    is-plain-obj: ^2.1.0
+  checksum: d86ddb3dd6e85d558dbf25dc944f3527b6bacb944db3fdda6e84a3f59c4e4b85231095f58b835758b9a57708342dee0f8de0dffa352974a48221487fe9f4584f
+  languageName: node
+  linkType: hard
+
 "merge-stream@npm:^2.0.0":
   version: 2.0.0
   resolution: "merge-stream@npm:2.0.0"
@@ -10185,6 +10212,7 @@ __metadata:
   dependencies:
     "@commitlint/config-conventional": ^17.0.2
     "@evilmartians/lefthook": ^1.5.0
+    "@react-native-async-storage/async-storage": ^2.1.0
     "@react-native-community/cli": 15.0.1
     "@react-native/eslint-config": ^0.73.1
     "@release-it/conventional-changelog": ^9.0.2
@@ -10196,7 +10224,7 @@ __metadata:
     eslint-config-prettier: ^9.0.0
     eslint-plugin-prettier: ^5.0.1
     jest: ^29.7.0
-    pamtag: ^1.3.0
+    pamtag: ../pamtracker.js
     prettier: ^3.0.3
     react: 18.3.1
     react-native: 0.76.6
@@ -10210,13 +10238,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"pamtag@npm:^1.3.0":
+"pamtag@file:../pamtracker.js::locator=pam-react-native%40workspace%3A.":
   version: 1.3.0
-  resolution: "pamtag@npm:1.3.0"
+  resolution: "pamtag@file:../pamtracker.js#../pamtracker.js::hash=2c1bb8&locator=pam-react-native%40workspace%3A."
   dependencies:
     crypto-js: ^4.1.1
     eta: ^2.2.0
-  checksum: 54cb184d7214724ffb5486ffdbd717ee387a5dcef45e412b8753be54133e97ff83a5e152a1680434badf02e946a99c1a6e322b41ce86bbc6a0360cf1c9b4e1e8
+  checksum: 4f62f7ae7e0733d545fbd4419e1b944c13a6e8ac248289a9591d5829ead9e333f617e0e66226f8cb1dafcf1bf21e14c4bcd3b10fb689fd32a9f1f19d3e32a728
   languageName: node
   linkType: hard
 

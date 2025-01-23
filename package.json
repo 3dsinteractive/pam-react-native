@@ -201,6 +201,7 @@
     "version": "0.45.5"
   },
   "dependencies": {
-    "pamtag": "^1.3.0"
+    "@react-native-async-storage/async-storage": "^2.1.0",
+    "pamtag": "../pamtracker.js"
   }
 }

@@ -1,7 +1,7 @@
 import PamReactNative from './NativePamReactNative';
 import PamTracker from 'pamtag';
 import type IConfig from 'pamtag/build/types/interface/iconfig';
-
+import { NativeStorageProvider } from './NativeStorageProvider';
 interface PamConfig {
   baseApi: string;
   trackingConsentMessageId: string;
@@ -36,9 +36,11 @@ export class Pam {
       facebookConsentMode: false,
       preferLanguage: 'th',
       displayCookieConsentBarOnStartup: false,
+      mobileAppMode: true,
     };
 
-    Pam._instance = new PamTracker(newConfig);
+    const storageProvider = new NativeStorageProvider();
+    Pam._instance = new PamTracker(newConfig, storageProvider);
   }
 
   static async track(event: string, payload: Record<string, any>) {

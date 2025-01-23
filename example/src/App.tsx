@@ -2,10 +2,10 @@ import { Text, View, StyleSheet } from 'react-native';
 import { Pam } from 'pam-react-native';
 
 Pam.initialize({
-  baseApi: '',
-  trackingConsentMessageId: '',
-  publicDBAlias: '',
-  loginDBAlias: '',
+  baseApi: 'https://stgx.pams.ai',
+  trackingConsentMessageId: '2VNmHzWrxPYJj0zDiM1cQGeW2S5',
+  publicDBAlias: 'ecom-public',
+  loginDBAlias: 'ecom-login',
   loginKey: 'customer',
 });
 
