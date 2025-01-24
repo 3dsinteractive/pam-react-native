@@ -10240,11 +10240,11 @@ __metadata:
 
 "pamtag@file:../pamtracker.js::locator=pam-react-native%40workspace%3A.":
   version: 1.3.0
-  resolution: "pamtag@file:../pamtracker.js#../pamtracker.js::hash=2c1bb8&locator=pam-react-native%40workspace%3A."
+  resolution: "pamtag@file:../pamtracker.js#../pamtracker.js::hash=179101&locator=pam-react-native%40workspace%3A."
   dependencies:
     crypto-js: ^4.1.1
     eta: ^2.2.0
-  checksum: 4f62f7ae7e0733d545fbd4419e1b944c13a6e8ac248289a9591d5829ead9e333f617e0e66226f8cb1dafcf1bf21e14c4bcd3b10fb689fd32a9f1f19d3e32a728
+  checksum: 9e8031766a8d350d69f5f612013ae5689161e785bc1788ad677ea1d0dc5786aa7faf0db7aa2e9216d29a48748bc4bd2463dc8b4af7de41d95c17268c8e472ace
   languageName: node
   linkType: hard
 
