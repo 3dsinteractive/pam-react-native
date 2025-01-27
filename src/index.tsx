@@ -2,6 +2,8 @@ import PamReactNative from './NativePamReactNative';
 import PamTracker from 'pamtag';
 import type IConfig from 'pamtag/build/types/interface/iconfig';
 import { NativeStorageProvider } from './NativeStorageProvider';
+import { ConsentMessage } from 'pamtag/build/types/interface/consent_message';
+
 interface PamConfig {
   baseApi: string;
   trackingConsentMessageId: string;
@@ -40,11 +42,83 @@ export class Pam {
     };
 
     const storageProvider = new NativeStorageProvider();
+
+    console.log('Pam create', newConfig);
     Pam._instance = new PamTracker(newConfig, storageProvider);
   }
 
   static async track(event: string, payload: Record<string, any>) {
     return await Pam.shared?.track(event, payload);
+  }
+
+  static async allowAllContactConsent(
+    consentId: string,
+    flushEventBefore?: boolean,
+    cookieLess?: boolean,
+    extrasPayload?: Record<string, any>
+  ) {
+    return Pam.shared?.allowAllContactConsent(
+      consentId,
+      flushEventBefore,
+      cookieLess,
+      extrasPayload
+    );
+  }
+
+  static async allowAllTrackingConsent(
+    consentId: string,
+    flushEventBefore?: boolean,
+    cookieLess?: boolean,
+    extrasPayload?: Record<string, any>
+  ) {
+    return Pam.shared?.allowAllTrackingConsent(
+      consentId,
+      flushEventBefore,
+      cookieLess,
+      extrasPayload
+    );
+  }
+
+  static async userLogin(loginId: string) {
+    return Pam.shared?.userLogin(loginId);
+  }
+
+  static async userLogout() {
+    return Pam.shared?.userLogout();
+  }
+
+  static async loadConsentStatus(consentMessageId: string) {
+    return Pam.shared?.loadConsentStatus(consentMessageId);
+  }
+
+  static eventBucket(callBack: () => void) {
+    return Pam.shared?.eventBucket(callBack);
+  }
+
+  static async cleanPamCookies() {
+    return Pam.shared?.cleanPamCookies();
+  }
+
+  static async submitConsent(
+    consent: ConsentMessage,
+    flushEventBefore?: boolean,
+    cookieLess?: boolean,
+    extrasPayload?: Record<string, any>
+  ) {
+    return Pam.shared?.submitConsent(
+      consent,
+      flushEventBefore,
+      cookieLess,
+      extrasPayload
+    );
+  }
+
+  static async loadConsentDetails(consentMessageIDs: string[]) {
+    return Pam.shared?.loadConsentDetails(consentMessageIDs);
+  }
+
+  static async loadConsentDetail(consentMessageID: string) {
+    return Pam.shared?.loadConsentDetail(consentMessageID);
   }
 }
 

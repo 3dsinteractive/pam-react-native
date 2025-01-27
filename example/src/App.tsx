@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet, Button } from 'react-native';
 import { Pam } from 'pam-react-native';
 
 Pam.initialize({
@@ -12,7 +12,12 @@ Pam.initialize({
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Result:</Text>
+      <Button
+        title="Allow Consent"
+        onPress={async () => {
+          await Pam.allowAllTrackingConsent('2VNmHzWrxPYJj0zDiM1cQGeW2S5');
+        }}
+      />
       <Button
         title="CLICK"
         onPress={async () => {

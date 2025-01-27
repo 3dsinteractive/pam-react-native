@@ -10213,6 +10213,7 @@ __metadata:
   dependencies:
     "@commitlint/config-conventional": ^17.0.2
     "@evilmartians/lefthook": ^1.5.0
+    "@react-native-async-storage/async-storage": ^2.1.0
     "@react-native-community/cli": 15.0.1
     "@react-native/eslint-config": ^0.73.1
     "@release-it/conventional-changelog": ^9.0.2
@@ -10241,11 +10242,11 @@ __metadata:
 
 "pamtag@file:../pamtracker.js::locator=pam-react-native%40workspace%3A.":
   version: 1.3.0
-  resolution: "pamtag@file:../pamtracker.js#../pamtracker.js::hash=f56d42&locator=pam-react-native%40workspace%3A."
+  resolution: "pamtag@file:../pamtracker.js#../pamtracker.js::hash=f7127a&locator=pam-react-native%40workspace%3A."
   dependencies:
     crypto-js: ^4.1.1
     eta: ^2.2.0
-  checksum: a5098020925c48238e98b3409389e1b3d48729216ed0208f9eb577bbe0564643a23515fefb1a69263893d25cbdfda06705ccf7f6c581bc1158f48a98e124b48b
+  checksum: 2014d4857792549caf46e0e78d5eecacd1dfea94fc7cae89c3e5e240b77ade8fa0db099961eae7d587eac4c74aea5ba09c8280d356d9e55f89919fff70aa0182
   languageName: node
   linkType: hard
 

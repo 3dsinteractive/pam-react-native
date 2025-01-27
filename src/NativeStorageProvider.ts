@@ -35,6 +35,7 @@ export class NativeStorageProvider implements IStorageProvider {
   }
 
   async getCookie(name: string): Promise<string | null> {
+    console.log('getCookie', name);
     try {
       const value = await AsyncStorage.getItem(`ck_${name}`);
       const expireTimestampStr = await AsyncStorage.getItem(
@@ -53,7 +54,9 @@ export class NativeStorageProvider implements IStorageProvider {
       if (value !== null) {
         return value;
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log('getCookie error', error);
+    }
     return null;
   }
 
