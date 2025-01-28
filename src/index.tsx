@@ -125,3 +125,7 @@ export class Pam {
 export function multiply(a: number, b: number): number {
   return PamReactNative.multiply(a, b);
 }
+
+export function displayPopup(): void {
+  PamReactNative.displayPopup();
+}

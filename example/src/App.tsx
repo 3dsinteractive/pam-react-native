@@ -1,5 +1,5 @@
 import { View, StyleSheet, Button } from 'react-native';
-import { Pam } from 'pam-react-native';
+import { Pam, displayPopup } from 'pam-react-native';
 
 Pam.initialize({
   baseApi: 'https://stgx.pams.ai',
@@ -29,6 +29,12 @@ export default function App() {
           } catch (e) {
             console.log('ERROR', e);
           }
+        }}
+      />
+      <Button
+        title="Open Popup"
+        onPress={async () => {
+          displayPopup();
         }}
       />
     </View>
