@@ -67,22 +67,22 @@ export class Pam {
   static async appAttention(pageName: string) {
     console.log('appAttention', pageName);
 
-    const banner = {
-      title: 'title',
-      description: 'description',
-      image:
-        'https://s3-ap-southeast-1.amazonaws.com/pam4-sansiri/ecom/public/2sFQrLjdyBbXkHkAMV03HrNtbhC.jpg',
-      size: 'large',
-    };
+    // const banner = {
+    //   title: 'title',
+    //   description: 'description',
+    //   image:
+    //     'https://s3-ap-southeast-1.amazonaws.com/pam4-sansiri/ecom/public/2sFQrLjdyBbXkHkAMV03HrNtbhC.jpg',
+    //   size: 'large',
+    // };
 
-    PamReactNative.displayPopup(banner);
-    // const contectID = Pam._instance.contactState.getContactId();
-    // const appAttention = await Pam.pamApi.loadAppAttention(pageName, contectID);
-    // if (appAttention) {
-    //   PamReactNative.displayPopup(appAttention);
-    // } else {
-    //   console.log('appAttention is undefined');
-    // }
+    // PamReactNative.displayPopup(banner);
+    const contectID = Pam._instance.contactState.getContactId();
+    const appAttention = await Pam.pamApi.loadAppAttention(pageName, contectID);
+    if (appAttention) {
+      PamReactNative.displayPopup(appAttention);
+    } else {
+      console.log('appAttention is undefined');
+    }
   }
 
   static async track(event: string, payload: Record<string, any>) {
