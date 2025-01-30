@@ -3,6 +3,16 @@ import PamTracker from 'pamtag';
 import type IConfig from 'pamtag/build/types/interface/iconfig';
 import { NativeStorageProvider } from './NativeStorageProvider';
 import { ConsentMessage } from 'pamtag/build/types/interface/consent_message';
+import { PamAPI } from './PamAPI';
+import { NativeEventEmitter, NativeModules } from 'react-native';
+
+const { EventEmitter } = NativeModules;
+const eventEmitter = new NativeEventEmitter(EventEmitter);
+
+// const subscription =
+eventEmitter.addListener('OnBannerClick', (event) => {
+  console.log('Received event from native:', event);
+});
 
 interface PamConfig {
   baseApi: string;
@@ -16,6 +26,8 @@ export type { PamConfig };
 
 export class Pam {
   static _instance: PamTracker;
+  static pamApi: PamAPI;
+
   constructor() {}
 
   static get shared(): PamTracker | undefined {
@@ -27,8 +39,12 @@ export class Pam {
   }
 
   static initialize(config: PamConfig) {
+    const baseApi = config.baseApi.endsWith('/')
+      ? config.baseApi.slice(0, -1)
+      : config.baseApi;
+
     const newConfig: IConfig = {
-      baseApi: config.baseApi,
+      baseApi: baseApi,
       trackingConsentMessageId: config.trackingConsentMessageId,
       publicDBAlias: config.publicDBAlias,
       loginDBAlias: config.loginDBAlias,
@@ -44,7 +60,29 @@ export class Pam {
     const storageProvider = new NativeStorageProvider();
 
     console.log('Pam create', newConfig);
+    Pam.pamApi = new PamAPI(baseApi);
     Pam._instance = new PamTracker(newConfig, storageProvider);
+  }
+
+  static async appAttention(pageName: string) {
+    console.log('appAttention', pageName);
+
+    const banner = {
+      title: 'title',
+      description: 'description',
+      image:
+        'https://s3-ap-southeast-1.amazonaws.com/pam4-sansiri/ecom/public/2sFQrLjdyBbXkHkAMV03HrNtbhC.jpg',
+      size: 'large',
+    };
+
+    PamReactNative.displayPopup(banner);
+    // const contectID = Pam._instance.contactState.getContactId();
+    // const appAttention = await Pam.pamApi.loadAppAttention(pageName, contectID);
+    // if (appAttention) {
+    //   PamReactNative.displayPopup(appAttention);
+    // } else {
+    //   console.log('appAttention is undefined');
+    // }
   }
 
   static async track(event: string, payload: Record<string, any>) {
@@ -126,6 +164,6 @@ export function multiply(a: number, b: number): number {
   return PamReactNative.multiply(a, b);
 }
 
-export function displayPopup(): void {
-  PamReactNative.displayPopup();
-}
+// export function displayPopup(): void {
+//   PamReactNative.displayPopup();
+// }

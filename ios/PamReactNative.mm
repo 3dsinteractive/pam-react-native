@@ -10,21 +10,16 @@ RCT_EXPORT_MODULE()
     return result;
 }
 
-- (void) displayPopup {
+- (void) displayPopup:(NSDictionary *)banner {
     dispatch_async(dispatch_get_main_queue(), ^{
-        UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+        UIWindow *keyWindow = [UIApplication sharedApplication].windows.firstObject;
         UIViewController *rootViewController = keyWindow.rootViewController;
         
         if (rootViewController) {
             PopupViewController *viewController = [[PopupViewController alloc] init];
             viewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
           
-            viewController.popupData = @{
-                @"title": @"Hello World",
-                @"description": @"This is a popup",
-                @"size": @"large",
-                @"image": @"https://placehold.co/720x1280/5596CA/000000"
-            };
+            viewController.popupData = banner;
             
             [rootViewController presentViewController:viewController animated:NO completion:nil];
         }

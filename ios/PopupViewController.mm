@@ -5,6 +5,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupUI];
+
+    self.eventEmitter = [[EventEmitter alloc] init];
 }
 
 - (void)setupUI {
@@ -115,15 +117,18 @@
             ]];
 
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                NSData *data = [NSData dataWithContentsOfURL:imageUrl];
-                UIImage *image = [UIImage imageWithData:data];
-               
-                NSLog(@"Image data length: %lu", (unsigned long)data.length);
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    imageView.image = image;
-                    CGSize size = imageView.frame.size;
-                    NSLog(@"Image size: %f x %f", size.width, size.height);
-                });
+                NSURLSession *session = [NSURLSession sharedSession];
+                [[session dataTaskWithURL:imageUrl completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                    if (data && !error) {
+                        UIImage *image = [UIImage imageWithData:data];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            imageView.image = image;
+                            CGSize size = imageView.frame.size;
+                        });
+                    } else {
+                        NSLog(@"Failed to load image: %@", error.localizedDescription);
+                    }
+                }] resume];
             });
         }
     }
@@ -163,6 +168,28 @@
         [closeButton.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:20],
         [closeButton.trailingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.trailingAnchor constant:-20]
     ]];
+
+    UIButton *info = [UIButton buttonWithType:UIButtonTypeSystem];
+    info.backgroundColor = [UIColor colorWithRed:0.36 green:0.94 blue:0.85 alpha:1.0];
+    [info setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    info.layer.cornerRadius = 20;
+    [info setTitle:@"LEARN MORE.." forState:UIControlStateNormal];
+    [info addTarget:self action:@selector(learnMore) forControlEvents:UIControlEventTouchUpInside];
+    info.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:info];
+
+    [NSLayoutConstraint activateConstraints:@[
+        [info.heightAnchor constraintEqualToConstant:40],
+        [info.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor constant:0],
+        [info.leadingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.leadingAnchor constant:10],
+        [info.trailingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.trailingAnchor constant:-10]
+    ]];
+
+}
+
+-(void) learnMore {
+    [self.eventEmitter dispatchOnBannerClick: self.popupData];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)viewDidLayoutSubviews {
