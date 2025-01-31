@@ -187,13 +187,13 @@ var Pam = class _Pam {
   }
   static async appAttention(pageName) {
     console.log("appAttention", pageName);
-    const banner = {
-      title: "title",
-      description: "description",
-      image: "https://s3-ap-southeast-1.amazonaws.com/pam4-sansiri/ecom/public/2sFQrLjdyBbXkHkAMV03HrNtbhC.jpg",
-      size: "large"
-    };
-    NativePamReactNative_default.displayPopup(banner);
+    const contectID = _Pam._instance.contactState.getContactId();
+    const appAttention = await _Pam.pamApi.loadAppAttention(pageName, contectID);
+    if (appAttention) {
+      NativePamReactNative_default.displayPopup(appAttention);
+    } else {
+      console.log("appAttention is undefined");
+    }
   }
   static async track(event, payload) {
     return await _Pam.shared?.track(event, payload);
