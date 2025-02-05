@@ -1,35 +1,14 @@
-#import "PamReactNative.h"
-#import "PopupViewController.h"
+#import <React/RCTBridgeModule.h>
 
-@implementation PamReactNative
-RCT_EXPORT_MODULE()
+@interface RCT_EXTERN_MODULE(PamReactNative, NSObject)
 
-- (NSNumber *)multiply:(double)a b:(double)b {
-    NSNumber *result = @(a * b);
+RCT_EXTERN_METHOD(multiply:(float)a withB:(float)b
+                 withResolver:(RCTPromiseResolveBlock)resolve
+                 withRejecter:(RCTPromiseRejectBlock)reject)
 
-    return result;
-}
-
-- (void) displayPopup:(NSDictionary *)banner {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        UIWindow *keyWindow = [UIApplication sharedApplication].windows.firstObject;
-        UIViewController *rootViewController = keyWindow.rootViewController;
-        
-        if (rootViewController) {
-            PopupViewController *viewController = [[PopupViewController alloc] init];
-            viewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
-          
-            viewController.popupData = banner;
-            
-            [rootViewController presentViewController:viewController animated:NO completion:nil];
-        }
-    });
-}
-
-- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
-    (const facebook::react::ObjCTurboModule::InitParams &)params
++ (BOOL)requiresMainQueueSetup
 {
-    return std::make_shared<facebook::react::NativePamReactNativeSpecJSI>(params);
+  return NO;
 }
 
 @end

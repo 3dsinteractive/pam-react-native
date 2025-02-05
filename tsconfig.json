@@ -4,7 +4,6 @@
     "paths": {
       "pam-react-native": ["./src/index"]
     },
-    "declaration": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "esModuleInterop": true,

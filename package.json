@@ -1,12 +1,10 @@
 {
   "name": "pam-react-native",
-  "version": "0.1.4",
-  "description": "Pam Real CDP SDK",
+  "version": "0.1.0",
+  "description": "Pam SDK for React native",
   "source": "./src/index.tsx",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "react-native": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./lib/commonjs/index.js",
+  "module": "./lib/module/index.js",
   "exports": {
     ".": {
       "import": {
@@ -20,7 +18,7 @@
     }
   },
   "files": [
-    "dist",
+    "src",
     "lib",
     "android",
     "ios",
@@ -39,7 +37,6 @@
     "!**/.*"
   ],
   "scripts": {
-    "build": "tsup src --format esm,cjs --dts",
     "example": "yarn workspace pam-react-native-example",
     "test": "jest",
     "typecheck": "tsc",
@@ -57,7 +54,7 @@
     "type": "git",
     "url": "git+https://github.com/3dsinteractive/pam-react-native.git"
   },
-  "author": "Narongrit Kanhanoi <narongrit@pams.ai> (https://pams.ai)",
+  "author": "Heart Narongrit <narongrit@3dsinteractive.com> (https://github.com/heart)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/3dsinteractive/pam-react-native/issues"
@@ -82,10 +79,9 @@
     "jest": "^29.7.0",
     "prettier": "^3.0.3",
     "react": "18.3.1",
-    "react-native": "0.76.6",
-    "react-native-builder-bob": "^0.35.2",
+    "react-native": "0.77.0",
+    "react-native-builder-bob": "^0.32.0",
     "release-it": "^17.10.0",
-    "tsup": "^8.3.6",
     "turbo": "^1.10.7",
     "typescript": "^5.2.2"
   },
@@ -93,8 +89,6 @@
     "@types/react": "^18.2.44"
   },
   "peerDependencies": {
-    "@react-native-async-storage/async-storage": "*",
-    "pamtag": "*",
     "react": "*",
     "react-native": "*"
   },
@@ -166,7 +160,6 @@
     "source": "src",
     "output": "lib",
     "targets": [
-      "codegen",
       [
         "commonjs",
         {
@@ -188,26 +181,9 @@
       ]
     ]
   },
-  "codegenConfig": {
-    "name": "RNPamReactNativeSpec",
-    "type": "modules",
-    "jsSrcsDir": "src",
-    "outputDir": {
-      "ios": "ios/generated",
-      "android": "android/generated"
-    },
-    "android": {
-      "javaPackageName": "com.pamreactnative"
-    },
-    "includesGeneratedCode": true
-  },
   "create-react-native-library": {
-    "type": "turbo-module",
-    "languages": "kotlin-objc",
-    "version": "0.45.5"
-  },
-  "dependencies": {
-    "@react-native-async-storage/async-storage": "^2.1.0",
-    "pamtag": "^1.4.0"
+    "type": "legacy-module",
+    "languages": "kotlin-swift",
+    "version": "0.47.0"
   }
 }

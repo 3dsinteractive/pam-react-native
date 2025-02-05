@@ -1,42 +1,17 @@
-import { View, StyleSheet, Button } from 'react-native';
-import { Pam } from 'pam-react-native';
-
-Pam.initialize({
-  baseApi: 'https://stgx.pams.ai',
-  trackingConsentMessageId: '2VNmHzWrxPYJj0zDiM1cQGeW2S5',
-  publicDBAlias: 'ecom-public',
-  loginDBAlias: 'ecom-login',
-  loginKey: 'customer',
-});
+import { multiply } from 'pam-react-native';
+import { Text, View, StyleSheet } from 'react-native';
+import { useState, useEffect } from 'react';
 
 export default function App() {
+  const [result, setResult] = useState<number | undefined>();
+
+  useEffect(() => {
+    multiply(3, 7).then(setResult);
+  }, []);
+
   return (
     <View style={styles.container}>
-      <Button
-        title="Load App Attention"
-        onPress={async () => {
-          Pam.appAttention('home');
-        }}
-      />
-      <Button
-        title="Allow Consent"
-        onPress={async () => {
-          await Pam.allowAllTrackingConsent('2VNmHzWrxPYJj0zDiM1cQGeW2S5');
-        }}
-      />
-      <Button
-        title="CLICK"
-        onPress={async () => {
-          console.log('clicked');
-          try {
-            console.log('CALL TRACK');
-            const result = await Pam.track('click', { name: 'button' });
-            console.log('RESULT', result);
-          } catch (e) {
-            console.log('ERROR', e);
-          }
-        }}
-      />
+      <Text>Result: {result}</Text>
     </View>
   );
 }
