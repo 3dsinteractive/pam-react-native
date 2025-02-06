@@ -1,6 +1,6 @@
 # pam-react-native
 
-Pam SDK for React native
+Pam SDK for React Native
 
 ## Installation
 

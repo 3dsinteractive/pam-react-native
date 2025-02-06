@@ -1,7 +1,7 @@
 {
   "name": "pam-react-native",
   "version": "0.1.0",
-  "description": "Pam SDK for React native",
+  "description": "Pam SDK for React Native",
   "source": "./src/index.tsx",
   "main": "./lib/commonjs/index.js",
   "module": "./lib/module/index.js",
@@ -54,7 +54,7 @@
     "type": "git",
     "url": "git+https://github.com/3dsinteractive/pam-react-native.git"
   },
-  "author": "Heart Narongrit <narongrit@3dsinteractive.com> (https://github.com/heart)",
+  "author": "Heart Narongrit <narongrit@pams.ai> (https://github.com/3dsinteractive)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/3dsinteractive/pam-react-native/issues"
@@ -69,6 +69,7 @@
     "@react-native-community/cli": "15.0.1",
     "@react-native/eslint-config": "^0.73.1",
     "@release-it/conventional-changelog": "^9.0.2",
+    "@types/crypto-js": "^4.2.2",
     "@types/jest": "^29.5.5",
     "@types/react": "^18.2.44",
     "commitlint": "^17.0.2",
@@ -80,7 +81,7 @@
     "prettier": "^3.0.3",
     "react": "18.3.1",
     "react-native": "0.77.0",
-    "react-native-builder-bob": "^0.32.0",
+    "react-native-builder-bob": "^0.36.0",
     "release-it": "^17.10.0",
     "turbo": "^1.10.7",
     "typescript": "^5.2.2"
@@ -89,6 +90,7 @@
     "@types/react": "^18.2.44"
   },
   "peerDependencies": {
+    "@react-native-async-storage/async-storage": "*",
     "react": "*",
     "react-native": "*"
   },
@@ -185,5 +187,9 @@
     "type": "legacy-module",
     "languages": "kotlin-swift",
     "version": "0.47.0"
+  },
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "^2.1.1",
+    "crypto-js": "^4.2.0"
   }
 }
