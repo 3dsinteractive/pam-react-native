@@ -109,7 +109,7 @@ class PamTracker {
   });
 
   constructor(config: IConfig, storage?: IStorageProvider) {
-    Utils.setConfig(config);
+    // Utils.setConfig(config);
     if (storage) {
       this.storage = storage;
       Utils.setStorageProvider(storage);

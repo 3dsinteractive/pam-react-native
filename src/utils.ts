@@ -1,13 +1,13 @@
-import type IConfig from './interface/iconfig';
+// import type IConfig from './interface/iconfig';
 import type { IStorageProvider } from './storage_provider';
 
 export class Utils {
   private static storage: IStorageProvider;
-  private static config: IConfig;
+  // private static config: IConfig;
 
-  static setConfig(config: IConfig) {
-    Utils.config = config;
-  }
+  // static setConfig(config: IConfig) {
+  //   Utils.config = config;
+  // }
 
   static setStorageProvider(storage: IStorageProvider) {
     Utils.storage = storage;
