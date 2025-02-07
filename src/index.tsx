@@ -34,10 +34,6 @@ const PamReactNative = NativeModules.PamReactNative
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return PamReactNative.multiply(a, b);
-}
-
 interface PamConfig {
   baseApi: string;
   trackingConsentMessageId: string;
@@ -96,18 +92,6 @@ export class Pam {
       | ((banner: any) => boolean)
       | ((banner: any) => Promise<boolean>)
   ) {
-    // console.log('appAttention', pageName);
-
-    // const banner = {
-    //   title: 'title',
-    //   description: 'description',
-    //   image:
-    //     'https://s3-ap-southeast-1.amazonaws.com/pam4-sansiri/ecom/public/2sFQrLjdyBbXkHkAMV03HrNtbhC.jpg',
-    //   size: 'large',
-    // };
-
-    // PamReactNative.displayPopup(banner, btnColor, btnLabel, btnLabelColor);
-
     const contectID = Pam._instance.contactState?.getContactId();
     if (contectID) {
       const appAttention = await Pam.pamApi.loadAppAttention(
