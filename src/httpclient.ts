@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 export class HTTPClient {
   private baseUrl: string;
 
@@ -11,7 +13,10 @@ export class HTTPClient {
   public async get(endpoint: string, headers: { [key: string]: string }) {
     const response = await fetch(`${this.baseUrl}${endpoint}`, {
       method: 'GET',
-      headers: headers || {},
+      headers: {
+        platform: Platform.OS,
+        ...(headers ?? {}),
+      },
     });
 
     if (!response.ok) {
@@ -26,6 +31,7 @@ export class HTTPClient {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        'platform': Platform.OS,
       },
       body: JSON.stringify(body),
     });
@@ -48,6 +54,7 @@ export class HTTPClient {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'platform': Platform.OS,
           ...headers,
         },
         credentials: cookieLess ? 'omit' : 'include',

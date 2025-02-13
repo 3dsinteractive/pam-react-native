@@ -163,11 +163,56 @@ export class Pam {
   }
 
   static async userLogin(loginId: string) {
-    return Pam.shared?.userLogin(loginId);
+    const deviceToken =
+      await Pam._instance.storage?.getLocalStorage('deviceToken');
+    const mediaKey =
+      await Pam._instance.storage?.getLocalStorage('push_media_key');
+    if (mediaKey) {
+      let payload: Record<string, any> = { _delete_media: mediaKey };
+      await Pam.shared?.track('delete_media', payload);
+    }
+    const loginResp = await Pam.shared?.userLogin(loginId);
+    if (deviceToken) {
+      await Pam.updatePushNotificationToken(deviceToken);
+    }
+
+    return loginResp;
   }
 
   static async userLogout() {
-    return Pam.shared?.userLogout();
+    const deviceToken =
+      await Pam._instance.storage?.getLocalStorage('deviceToken');
+    const mediaKey =
+      await Pam._instance.storage?.getLocalStorage('push_media_key');
+    if (mediaKey) {
+      let payload: Record<string, any> = { _delete_media: mediaKey };
+      await Pam.shared?.track('delete_media', payload);
+    }
+
+    const logoutResp = await Pam.shared?.userLogout();
+
+    if (deviceToken) {
+      await Pam.updatePushNotificationToken(deviceToken);
+    }
+    return logoutResp;
+  }
+
+  static updatePushNotificationToken(deviceToken: string) {
+    let mediaKey = '';
+    if (Platform.OS === 'ios') {
+      if (__DEV__) {
+        deviceToken = `_${deviceToken}`;
+      }
+      mediaKey = 'ios_notification';
+    } else {
+      mediaKey = 'android_notification';
+    }
+    let payload: Record<string, any> = {};
+    payload[mediaKey] = deviceToken;
+
+    Pam.shared?.track('save_push', payload);
+    Pam._instance.storage?.setLocalStorage('deviceToken', deviceToken);
+    Pam._instance.storage?.setLocalStorage('push_media_key', mediaKey);
   }
 
   static async loadConsentStatus(consentMessageId: string) {
