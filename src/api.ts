@@ -7,6 +7,8 @@ import { ConsentMessage } from './interface/consent_message';
 import type { IAttentionItem } from './interface/attention';
 import type { ICustomerConsentStatus } from './interface/iconsent_status';
 import { Utils } from './utils';
+import type { PamPushMessage } from './interface/pam_push_message';
+
 export class PamAPI {
   private http: HTTPClient;
 
@@ -162,5 +164,54 @@ export class PamAPI {
     }
 
     return result;
+  }
+
+  async loadPushNotificationsFromCustomerID(
+    database: string,
+    contactID: string,
+    customer: string
+  ): Promise<PamPushMessage[] | null> {
+    let response: any;
+    try {
+      const url = `/api/app-notifications?_database=${database}&_contact_id=${contactID}&customer=${customer}`;
+      response = await this.http.get(url, {});
+    } catch (e) {}
+    if (response) {
+      return response.data as PamPushMessage[];
+    }
+    return null;
+  }
+
+  async loadPushNotificationsFromMobile(
+    database: string,
+    contactID: string,
+    mobileNumber: string
+  ): Promise<PamPushMessage[] | null> {
+    let response: any;
+    try {
+      const url = `/api/app-notifications?_database=${database}&_contact_id=${contactID}&sms=${mobileNumber}`;
+      response = await this.http.get(url, {});
+    } catch (e) {}
+
+    if (response) {
+      return response.data as PamPushMessage[];
+    }
+    return null;
+  }
+
+  async loadPushNotificationsFromEmail(
+    database: string,
+    contactID: string,
+    email: string
+  ): Promise<PamPushMessage[] | null> {
+    let response: any;
+    try {
+      const url = `/api/app-notifications?_database=${database}&_contact_id=${contactID}&email=${email}`;
+      response = await this.http.get(url, {});
+    } catch (e) {}
+    if (response) {
+      return response.data as PamPushMessage[];
+    }
+    return null;
   }
 }

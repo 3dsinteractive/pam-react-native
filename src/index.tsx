@@ -6,6 +6,7 @@ import PamTracker from './PamTracker';
 import type { ConsentMessage } from './interface/consent_message';
 import { type AppAttentionStyle } from './interface/app_attention_style';
 import { Linking } from 'react-native';
+import type { PamPushMessage } from './interface/pam_push_message';
 
 const LINKING_ERROR =
   `The package 'pam-react-native' doesn't seem to be linked. Make sure: \n\n` +
@@ -128,6 +129,96 @@ export class Pam {
         console.log('appAttention is undefined');
       }
     }
+  }
+
+  static isPushNotiFromPam(message: any) {
+    return message.data.hasOwnProperty('pam');
+  }
+
+  static convertToPamPushMessage(message: any): PamPushMessage | undefined {
+    if (Pam.isPushNotiFromPam(message)) {
+      let data = message.data;
+      let pam: any = data.pam;
+      let payload: Record<string, any>;
+
+      try {
+        payload = JSON.parse(pam);
+      } catch (e) {
+        return undefined;
+      }
+
+      const flex = payload.flex;
+      const regExp = /src="(.*?)"/;
+      const match = flex.match(regExp);
+      const banner = match?.[1] ?? '';
+      const pixel = payload.pixel ?? '';
+      const popupType = payload.popup_type ?? '';
+      const url = payload.url;
+      const title = message.notification?.title ?? '';
+      const description = message.notification?.body ?? '';
+
+      var item = {
+        deliverID: '',
+        pixel: pixel,
+        title: title,
+        description: description,
+        thumbnailUrl: banner,
+        flex: flex,
+        url: url,
+        popupType: popupType,
+        date: new Date(),
+        isOpen: false,
+        data: payload,
+      };
+
+      return item;
+    }
+    return undefined;
+  }
+
+  static async loadPushNotificationsFromCustomerID(
+    customerID: string
+  ): Promise<PamPushMessage[] | null> {
+    const contactID = Pam.shared?.contactState?.getContactId();
+    const database = Pam.shared?.contactState?.getDatabase();
+    if (!contactID || !database) {
+      return null;
+    }
+    return await Pam.pamApi.loadPushNotificationsFromCustomerID(
+      database,
+      contactID,
+      customerID
+    );
+  }
+
+  static async loadPushNotificationsFromMobile(
+    mobileNumber: string
+  ): Promise<PamPushMessage[] | null> {
+    const contactID = Pam.shared?.contactState?.getContactId();
+    const database = Pam.shared?.contactState?.getDatabase();
+    if (!contactID || !database) {
+      return null;
+    }
+    return await Pam.pamApi.loadPushNotificationsFromMobile(
+      database,
+      contactID,
+      mobileNumber
+    );
+  }
+
+  static async loadPushNotificationsFromEmail(
+    email: string
+  ): Promise<PamPushMessage[] | null> {
+    const contactID = Pam.shared?.contactState?.getContactId();
+    const database = Pam.shared?.contactState?.getDatabase();
+    if (!contactID || !database) {
+      return null;
+    }
+    return await Pam.pamApi.loadPushNotificationsFromEmail(
+      database,
+      contactID,
+      email
+    );
   }
 
   static async track(event: string, payload: Record<string, any>) {
