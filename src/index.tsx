@@ -163,6 +163,7 @@ export class Pam {
         title,
         description,
         banner,
+        banner,
         flex,
         url,
         popupType,

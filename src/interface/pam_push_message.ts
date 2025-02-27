@@ -10,6 +10,7 @@ export class PamPushMessage {
   isOpen?: boolean;
   date?: Date;
   data?: Record<string, any>;
+  bannerUrl?: string;
 
   constructor(
     deliverID: string,
@@ -17,6 +18,7 @@ export class PamPushMessage {
     title: string,
     description: string,
     thumbnailUrl: string,
+    bannerUrl: string,
     flex: string,
     url: string,
     popupType: string,
@@ -29,6 +31,7 @@ export class PamPushMessage {
     this.title = title;
     this.description = description;
     this.thumbnailUrl = thumbnailUrl;
+    this.bannerUrl = bannerUrl;
     this.flex = flex;
     this.url = url;
     this.popupType = popupType;
@@ -73,6 +76,7 @@ export class PamPushMessage {
       data.title,
       data.description,
       data.thumbnail_url,
+      data.banner_url,
       data.flex,
       data.url,
       payload.popupType,
