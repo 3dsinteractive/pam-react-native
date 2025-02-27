@@ -6,7 +6,7 @@ import PamTracker from './PamTracker';
 import type { ConsentMessage } from './interface/consent_message';
 import { type AppAttentionStyle } from './interface/app_attention_style';
 import { Linking } from 'react-native';
-import type { PamPushMessage } from './interface/pam_push_message';
+import { PamPushMessage } from './interface/pam_push_message';
 
 const LINKING_ERROR =
   `The package 'pam-react-native' doesn't seem to be linked. Make sure: \n\n` +
@@ -157,19 +157,19 @@ export class Pam {
       const title = message.notification?.title ?? '';
       const description = message.notification?.body ?? '';
 
-      var item = {
-        deliverID: '',
-        pixel: pixel,
-        title: title,
-        description: description,
-        thumbnailUrl: banner,
-        flex: flex,
-        url: url,
-        popupType: popupType,
-        date: new Date(),
-        isOpen: false,
-        data: payload,
-      };
+      let item = new PamPushMessage(
+        '',
+        pixel,
+        title,
+        description,
+        banner,
+        flex,
+        url,
+        popupType,
+        new Date(),
+        false,
+        payload
+      );
 
       return item;
     }

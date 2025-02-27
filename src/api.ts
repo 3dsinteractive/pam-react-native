@@ -7,7 +7,7 @@ import { ConsentMessage } from './interface/consent_message';
 import type { IAttentionItem } from './interface/attention';
 import type { ICustomerConsentStatus } from './interface/iconsent_status';
 import { Utils } from './utils';
-import type { PamPushMessage } from './interface/pam_push_message';
+import { PamPushMessage } from './interface/pam_push_message';
 
 export class PamAPI {
   private http: HTTPClient;
@@ -177,7 +177,7 @@ export class PamAPI {
       response = await this.http.get(url, {});
     } catch (e) {}
     if (response) {
-      return response.data as PamPushMessage[];
+      return PamPushMessage.parseFromResponse(response.items);
     }
     return null;
   }
@@ -194,7 +194,7 @@ export class PamAPI {
     } catch (e) {}
 
     if (response) {
-      return response.data as PamPushMessage[];
+      return PamPushMessage.parseFromResponse(response.items);
     }
     return null;
   }
@@ -209,8 +209,9 @@ export class PamAPI {
       const url = `/api/app-notifications?_database=${database}&_contact_id=${contactID}&email=${email}`;
       response = await this.http.get(url, {});
     } catch (e) {}
+
     if (response) {
-      return response.data as PamPushMessage[];
+      return PamPushMessage.parseFromResponse(response.items);
     }
     return null;
   }
