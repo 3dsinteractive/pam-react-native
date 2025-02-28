@@ -166,6 +166,21 @@ export class PamAPI {
     return result;
   }
 
+  async loadPushNotifications(
+    database: string,
+    contactID: string
+  ): Promise<PamPushMessage[] | null> {
+    let response: any;
+    try {
+      const url = `/api/app-notifications?_database=${database}&_contact_id=${contactID}`;
+      response = await this.http.get(url, {});
+    } catch (e) {}
+    if (response) {
+      return PamPushMessage.parseFromResponse(response.items);
+    }
+    return null;
+  }
+
   async loadPushNotificationsFromCustomerID(
     database: string,
     contactID: string,

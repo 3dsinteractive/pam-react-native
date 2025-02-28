@@ -177,6 +177,15 @@ export class Pam {
     return undefined;
   }
 
+  static async loadPushNotifications(): Promise<PamPushMessage[] | null> {
+    const contactID = Pam.shared?.contactState?.getContactId();
+    const database = Pam.shared?.contactState?.getDatabase();
+    if (!contactID || !database) {
+      return null;
+    }
+    return await Pam.pamApi.loadPushNotifications(database, contactID);
+  }
+
   static async loadPushNotificationsFromCustomerID(
     customerID: string
   ): Promise<PamPushMessage[] | null> {
