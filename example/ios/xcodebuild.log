@@ -1,0 +1,9 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -workspace ios/PamReactNativeExample.xcworkspace -scheme PamReactNativeExample -configuration Debug -sdk iphoneos -destination generic/platform=iOS -allowProvisioningUpdates
+
+User defaults from command line:
+    IDEPackageSupportUseBuiltinSCM = YES
+
+Build settings from command line:
+    SDKROOT = iphoneos18.2
+
