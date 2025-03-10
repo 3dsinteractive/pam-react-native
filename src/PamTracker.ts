@@ -209,6 +209,11 @@ class PamTracker {
       data[loginKey ?? ''] = loginId;
     }
 
+    const database = this.config.loginDBAlias;
+    data._database = database;
+
+    data._contact_id = '<REMOVE>';
+
     job = {
       event: 'login',
       trackingConsentMessageId: this.config.trackingConsentMessageId,
