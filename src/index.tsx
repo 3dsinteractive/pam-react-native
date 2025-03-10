@@ -298,10 +298,24 @@ export class Pam {
     return logoutResp;
   }
 
+  private static isHex(str: string) {
+    if (!str || str === '') {
+      return false;
+    }
+    return /^[0-9A-Fa-f]+$/.test(str);
+  }
+
   static updatePushNotificationToken(deviceToken: string) {
+    if (!deviceToken || deviceToken === '') {
+      return;
+    }
+
+    // Firebase Token will not Hex
+    const isFirebaseToken = !Pam.isHex(deviceToken);
+
     let mediaKey = '';
     if (Platform.OS === 'ios') {
-      if (__DEV__) {
+      if (!isFirebaseToken && __DEV__) {
         deviceToken = `_${deviceToken}`;
       }
       mediaKey = 'ios_notification';
