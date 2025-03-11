@@ -1,6 +1,6 @@
 {
   "name": "pam-react-native",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "description": "Pam SDK for React Native",
   "source": "./src/index.tsx",
   "main": "./lib/commonjs/index.js",
