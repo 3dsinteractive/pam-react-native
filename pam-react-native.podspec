@@ -23,16 +23,16 @@ Pod::Spec.new do |s|
       "HEADER_SEARCH_PATHS" => "\"$(PODS_ROOT)/boost\" \"$(PODS_ROOT)/Headers/Public/React-Core\" \"$(PODS_ROOT)/Headers/Public/RCTRequired\" \"$(PODS_ROOT)/Headers/Public\"",
   }
 
-  s.dependency "React-Core"
-  s.dependency "React-RCTRequired"
+  # s.dependency "React-Core"
+  # s.dependency "React-RCTRequired"
 
   # Use install_modules_dependencies helper to install the dependencies if React Native version >=0.71.0.
   # See https://github.com/facebook/react-native/blob/febf6b7f33fdb4904669f99d795eba4c0f95d7bf/scripts/cocoapods/new_architecture.rb#L79.
   if respond_to?(:install_modules_dependencies, true)
     install_modules_dependencies(s)
   else
-    # s.dependency "React-Core"
-    # s.dependency "React-RCTRequired"
+    s.dependency "React-Core"
+    s.dependency "React-RCTRequired"
 
     # Don't install the dependencies when we run `pod install` in the old architecture.
     if ENV['RCT_NEW_ARCH_ENABLED'] == '1' then
