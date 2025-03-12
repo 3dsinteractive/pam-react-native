@@ -1,6 +1,6 @@
 {
   "name": "pam-react-native",
-  "version": "0.1.21",
+  "version": "0.1.23",
   "description": "Pam SDK for React Native",
   "source": "./src/index.tsx",
   "main": "./lib/commonjs/index.js",
@@ -66,7 +66,6 @@
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^17.0.2",
-    "@evilmartians/lefthook": "^1.5.0",
     "@react-native-community/cli": "15.0.1",
     "@react-native/eslint-config": "^0.73.1",
     "@release-it/conventional-changelog": "^9.0.2",
@@ -190,7 +189,7 @@
     "version": "0.47.0"
   },
   "dependencies": {
-    "@react-native-async-storage/async-storage": "^2.1.1",
+    "@react-native-async-storage/async-storage": "*",
     "crypto-js": "^4.2.0"
   }
 }
