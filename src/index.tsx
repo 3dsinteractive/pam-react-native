@@ -177,6 +177,18 @@ export class Pam {
     return undefined;
   }
 
+  static getContactId() {
+    return this.shared?.contactState?.getContactId();
+  }
+
+  static isLogin() {
+    return this.shared?.contactState?.loginStatus || false;
+  }
+
+  static getDatabase() {
+    return this.shared?.contactState?.getDatabase();
+  }
+
   static async loadPushNotifications(): Promise<PamPushMessage[] | null> {
     const contactID = Pam.shared?.contactState?.getContactId();
     const database = Pam.shared?.contactState?.getDatabase();
