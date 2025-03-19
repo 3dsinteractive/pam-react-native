@@ -9,7 +9,7 @@ export class ContactStateManager {
   private loginKey: string;
   private loginId: string = '';
 
-  private loginStatus = false;
+  public loginStatus = false;
 
   constructor(publicDB: string, loginDB: string, loginKey: string) {
     this.publicDB = publicDB;
