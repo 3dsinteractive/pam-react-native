@@ -278,12 +278,17 @@ export class Pam {
   static async userLogin(loginId: string) {
     const deviceToken =
       await Pam._instance.storage?.getLocalStorage('deviceToken');
-    const mediaKey =
-      await Pam._instance.storage?.getLocalStorage('push_media_key');
-    if (mediaKey) {
-      let payload: Record<string, any> = { _delete_media: mediaKey };
-      await Pam.shared?.track('delete_media', payload);
+
+    let mediaKey = '';
+    if (Platform.OS === 'ios') {
+      mediaKey = 'ios_notification';
+    } else {
+      mediaKey = 'android_notification';
     }
+
+    let payload: Record<string, any> = { _delete_media: mediaKey };
+    await Pam.shared?.track('delete_media', payload);
+
     const loginResp = await Pam.shared?.userLogin(loginId);
     if (deviceToken) {
       await Pam.updatePushNotificationToken(deviceToken);
@@ -295,12 +300,16 @@ export class Pam {
   static async userLogout() {
     const deviceToken =
       await Pam._instance.storage?.getLocalStorage('deviceToken');
-    const mediaKey =
-      await Pam._instance.storage?.getLocalStorage('push_media_key');
-    if (mediaKey) {
-      let payload: Record<string, any> = { _delete_media: mediaKey };
-      await Pam.shared?.track('delete_media', payload);
+
+    let mediaKey = '';
+    if (Platform.OS === 'ios') {
+      mediaKey = 'ios_notification';
+    } else {
+      mediaKey = 'android_notification';
     }
+
+    let payload: Record<string, any> = { _delete_media: mediaKey };
+    await Pam.shared?.track('delete_media', payload);
 
     const logoutResp = await Pam.shared?.userLogout();
 
